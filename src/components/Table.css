@@ -1,6 +1,7 @@
 .section {
     width: 1200px;
     margin: auto;
+    max-width: 100%;
 }
 
 body {
@@ -12,8 +13,9 @@ body {
     width: 800px;
     background-color: white;
     padding: 20px;
-    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 5px;
     margin: 40px auto 40px auto;
+    max-width: 100%;
 }
 
 .article h2 {
@@ -21,3 +23,22 @@ body {
     margin-left: 10px;
 }
 
+.article button {
+
+    display: block;
+    width: 300px;
+    background-color: rgb(33, 74, 255);
+    color: white;
+    margin: 20px auto 10px auto;
+    padding: 5px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 5px;
+
+
+
+}
+
+.article button:hover {
+
+    background-color: rgb(52, 157, 255);
+}

@@ -56,10 +56,10 @@ function App() {
 
 
   return (
-    <>
+    <section className='section'>
 
 
-      <form onSubmit={postForm}>
+      <form onSubmit={postForm} className='form'>
         <h2>Lägg till</h2>
         <label htmlFor="title">Titel</label>
         <input type="text" name="title" id="title" value={formData.title} onChange={(event) => setFormData({ ...formData, title: event.target.value })} />
@@ -76,18 +76,19 @@ function App() {
 
         </select>
 
-        <input type="submit" value="Skicka" />
+        <input type="submit" value="Skicka" className='submit-button' />
 
       </form>
 
 
-      <section className='big-container'>
 
-        <h2>Att göra-lista</h2>
-        {todos.map((todo: TodoInterface) => <Table todo={todo} key={todo.id} />)}
 
-      </section>
-    </>
+      <h2 className='text-center'>Att göra-lista</h2>
+      {todos.map((todo: TodoInterface) => <Table todo={todo} key={todo.id} />
+    )}
+
+    </section>
+
   )
 }
 

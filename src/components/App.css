@@ -1,0 +1,43 @@
+.form {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 5px;
+    width: 500px;
+    max-width: 100%;
+    margin: 50px auto 50px auto;
+    padding: 20px;
+    background-color: white;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.form h2,
+.form h1 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.8em;
+}
+
+.form label,
+.form input,
+.form select {
+    width: 300px;
+    margin: 20px auto 10px auto;
+    display: block;
+}
+
+.submit-button {
+    display: block;
+    width: 300px;
+    background-color: rgb(33, 74, 255);
+    color: white;
+    margin: 20px auto 10px auto;
+    padding: 5px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 5px;
+}
+
+.submit-button:hover {
+
+    background-color: rgb(52, 157, 255);
+}

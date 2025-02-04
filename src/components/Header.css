@@ -5,6 +5,7 @@ CSS är specifik till Header.tsx.
 
 header{
     width: 100%;
+    background-color: rgba(0, 126, 48, 0.397);
 }
 
 header h1 {
