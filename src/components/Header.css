@@ -1,0 +1,13 @@
+
+/*
+CSS är specifik till Header.tsx.
+*/
+
+header{
+    width: 100%;
+}
+
+header h1 {
+    text-align: center;
+    padding: 20px;
+}
