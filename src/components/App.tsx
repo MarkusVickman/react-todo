@@ -2,6 +2,7 @@ import './App.css'
 import TodoInterface from "../todo-interface"
 import { useEffect, useState } from 'react';
 import Table from './Table';
+import Todo from '../todo-interface';
 
 
 function App() {
@@ -52,8 +53,23 @@ function App() {
      }*/
 
     console.log(formData);
+
   }
 
+  const editPost = (event: React.MouseEvent) => {
+
+    const target = parseInt((event.currentTarget as HTMLDivElement).id);
+    console.log(target);
+
+    const todo = todos.find(todo => todo.id === target);
+    
+    console.log(todo);
+
+    if (todo) {
+      setFormData(todo);
+    }
+
+  }
 
   return (
     <section className='section'>
@@ -77,6 +93,8 @@ function App() {
         </select>
 
         <input type="submit" value="Skicka" className='submit-button' />
+        <input type="button" value="uppdatera" className='submit-button' />
+        <input type="button" value="Ta bort" className='submit-button' />
 
       </form>
 
@@ -84,8 +102,17 @@ function App() {
 
 
       <h2 className='text-center'>Att göra-lista</h2>
-      {todos.map((todo: TodoInterface) => <Table todo={todo} key={todo.id} />
-    )}
+      {todos.map((todo: TodoInterface) => /*<Table todo={todo} key={todo.id} />*/
+
+        <article className="article" key={todo.id} >
+          <h2>{todo.title}</h2>
+          <p><b>Beskrivning: </b> {todo.description}</p>
+          <p><b>Datum: </b>{todo.date?.toString().substring(0, 10)}</p>
+          <p><b>Utförd: </b>{todo.isCompleted}</p>
+          <button id={(todo.id?.toString())} onClick={editPost}>Ändra</button>
+        </article>
+
+      )}
 
     </section>
 
