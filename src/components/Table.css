@@ -1,5 +1,4 @@
-
-
+/*Styling av artikel-div för att göra inlägg*/
 .article {
     width: 800px;
     background-color: white;
@@ -9,12 +8,10 @@
     max-width: 100%;
 }
 
-
 .article h2 {
     text-decoration: underline;
     margin-left: 10px;
 }
-
 
 .article button {
 
@@ -27,7 +24,6 @@
     border-style: none;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 5px;
 }
-
 
 .article button:hover {
 

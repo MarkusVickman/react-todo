@@ -1,7 +1,7 @@
 import TodoInterface from "../todo-interface"
 import './Table.css'
 
-
+//Interface för propsen som komponenten tar emot
 interface TableProps {
     todo: TodoInterface;
     editPost: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -11,7 +11,6 @@ interface TableProps {
 const Table: React.FC<TableProps> = ({ todo, editPost }) => {
    
     //Tar emot props och skriver ut värden på rätt plats med Vilkor för att bestäma stil och text som skrivs ut.
-    // Kan ändra om klar eller ej med funktionen changeIfCompleted och dess id.
     return (
         <article className="article" key={todo.id} style={{ backgroundColor: 
             todo.isCompleted === "avklarad" ? "yellowgreen" : 

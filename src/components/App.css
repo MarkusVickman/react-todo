@@ -1,16 +1,13 @@
-
-
+/*Större section*/
 .section {
     width: 1200px;
     margin: auto;
     max-width: 100%;
 }
 
-
 .text-center {
     text-align: center;
 }
-
 
 .form {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 5px;
@@ -22,14 +19,12 @@
 }
 
 
-
 .form h2,
 .form h1 {
     margin-bottom: 20px;
     text-align: center;
     font-size: 1.8em;
 }
-
 
 .form label,
 .form input,
@@ -40,11 +35,9 @@
     display: block;
 }
 
-
 .form p {
     text-align: center;
 }
-
 
 .submit-button {
     display: block;
@@ -57,20 +50,39 @@
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 5px;
 }
 
-
 .submit-button:hover {
 
     background-color: rgb(52, 157, 255);
 }
 
-
+/*Styling av extraknappar till formuläret*/
 #update,
 #delete,
 #cancel {
     display: none;
 }
 
+/*Styling av extraknappar till formuläret*/
+#delete {
+    background-color: rgb(255, 57, 57);
+}
 
+/*Styling av extraknappar till formuläret*/
+#cancel {
+    background-color: rgb(255, 115, 0);
+}
+
+/*Styling av extraknappar till formuläret*/
+#delete:hover {
+    background-color: salmon;
+}
+
+/*Styling av extraknappar till formuläret*/
+#cancel:hover {
+    background-color: rgb(255, 165, 91);
+}
+
+/*Styling av felmeddelande div*/
 #error-message {
     position: fixed;
     bottom: 10%;

@@ -3,10 +3,10 @@ import TodoInterface from "../todo-interface"
 import { FormEvent, useEffect, useState } from 'react';
 import Table from './Table';
 
-
+/*Parentkomponenten åt table(utskrift av inlägg) med formulär*/ 
 function App() {
 
-
+  /* Alla olika states */ 
   const [todos, setToDos] = useState<TodoInterface[] | []>([]);
   const [formData, setFormData] = useState<TodoInterface>({ title: "", description: "", isCompleted: "ej påbörjad" })
   const [formTitle, setFormTitle] = useState<string>("Lägg till");
@@ -14,29 +14,28 @@ function App() {
   const [errorTitle, setErrorTitle] = useState<string>("");
   const [errorDescription, setErrorDescription] = useState<string>("");
 
-  useEffect(() => {
-    getTodos();
-  })
-
-
+  /* Deklarerar htmlelement */ 
   const errorDiv = document.getElementById("error-message");
   const submitBtn = document.getElementById("submit");
   const updateBtn = document.getElementById("update");
   const deleteBtn = document.getElementById("delete");
   const cancelBtn = document.getElementById("cancel");
 
+  /*resetar genom att ladda in inlägg på nytt när states ändras.*/ 
+  useEffect(() => {
+    getTodos();
+  })
 
-
-
+ /* 
+    -Async-metod med GET- som läser in alla inlägg från json till object.
+ */ 
   const getTodos = async () => {
     try {
-
       const respons = await fetch("https://m2-react-todo-backend-nest-js-1050979898493.europe-north1.run.app/api");
       if (!respons.ok) {
         throw Error;
       } else {
         const data = await respons.json();
-
         setToDos(data);
       }
     }
@@ -45,7 +44,9 @@ function App() {
     }
   }
 
-
+ /* 
+    -Async-metod med POST- som sparar ett inlägg från object till json.
+ */ 
   const postForm = async (event: FormEvent) => {
     event.preventDefault();
     if (checkInput()) {
@@ -71,7 +72,9 @@ function App() {
     }
   }
 
-
+ /* 
+    -Async-metod med PUT för att uppdatera ett befintligt inlägg från object till json.
+ */ 
   const updatePost = async (id: number, event: React.MouseEvent) => {
     event.preventDefault();
     if (checkInput()) {
@@ -98,7 +101,9 @@ function App() {
     }
   }
 
-
+ /* 
+    -Async-metod med DELETE som tar bort ett inlägg.
+ */ 
   const deletePost = async (id: number, event: React.MouseEvent) => {
     event.preventDefault();
     try {
@@ -121,18 +126,22 @@ function App() {
     }
   }
 
-
+ /* 
+    -Async-metod med POST- som sparar ett inlägg från object till json.
+ */ 
   const editPost = (event: React.MouseEvent<HTMLButtonElement>) => {
 
+    //Scrollanimation till toppen av sidan
     window.scrollTo({ top: 0, behavior: 'smooth' });
-
     setFormTitle("Redigera inlägg");
 
-
+    //Läser in id från HTMLelement
     const target = parseInt((event.currentTarget as HTMLButtonElement).id);
+
+    //Hittar todo med specifikt id
     const todo = todos.find(todo => todo.id === target);
 
-
+    //Styling ändras för HTMLelement
     if (todo) {
       setFormData(todo);
       updateBtn!.style.display = "block";
@@ -142,7 +151,7 @@ function App() {
     }
   }
 
-
+  //Metod som ändrar styling för HTMLelement
   const cancelPost = () => {
     updateBtn!.style.display = "none";
     deleteBtn!.style.display = "none";
@@ -152,20 +161,18 @@ function App() {
     setFormTitle("Lägg till");
   }
 
+  //Metod som skriver ut felmeddelande och nollställer efter 3 sekunder.
   const error = (error: string) => {
-
     setErrorMessage(error);
-
     errorDiv!.style.display = "block";
 
     setTimeout(() => {
       errorDiv!.style.display = "none";
       setErrorMessage("");
     }, 3000);
-
   }
 
-
+  //Metod som kontrollerar inmatningar och returnerar true om korrekt inmatat.
   const checkInput = () => {
     let validationErrors: boolean = true;
     if (formData.title.length < 3) {
@@ -186,6 +193,7 @@ function App() {
     }
   }
 
+  //Skriver ut formuläret till skärm samt skickar props för editPost samt todos till child komponenten (Table).
   return (
     <section className='section'>
       <form onSubmit={postForm} className='form'>
