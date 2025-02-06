@@ -1,3 +1,17 @@
+
+
+.section {
+    width: 1200px;
+    margin: auto;
+    max-width: 100%;
+}
+
+
+.text-center {
+    text-align: center;
+}
+
+
 .form {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 5px;
     width: 500px;
@@ -7,9 +21,7 @@
     background-color: white;
 }
 
-.text-center {
-    text-align: center;
-}
+
 
 .form h2,
 .form h1 {
@@ -17,6 +29,7 @@
     text-align: center;
     font-size: 1.8em;
 }
+
 
 .form label,
 .form input,
@@ -27,9 +40,11 @@
     display: block;
 }
 
+
 .form p {
     text-align: center;
 }
+
 
 .submit-button {
     display: block;
@@ -42,83 +57,31 @@
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 5px;
 }
 
+
 .submit-button:hover {
 
     background-color: rgb(52, 157, 255);
 }
 
 
-
-
-
-
-
-
-
-
-
-
-.section {
-    width: 1200px;
-    margin: auto;
-    max-width: 100%;
-}
-
-body {
-    background-color: rgb(236, 236, 236);
-}
-
-
-.article {
-    width: 800px;
-    background-color: white;
-    padding: 20px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 5px;
-    margin: 40px auto 40px auto;
-    max-width: 100%;
-}
-
-.article h2 {
-    text-decoration: underline;
-    margin-left: 10px;
-}
-
-.article button {
-
-    display: block;
-    width: 300px;
-    background-color: rgb(33, 74, 255);
-    color: white;
-    margin: 20px auto 10px auto;
-    padding: 5px;
-    border-style: none;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 5px;
-
-
-
-}
-
-.article button:hover {
-
-    background-color: rgb(52, 157, 255);
-}
-
-#update, #delete, #cancel {
+#update,
+#delete,
+#cancel {
     display: none;
 }
 
-#error-message {
- position: fixed;
- bottom: 10%;
- box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
- max-width: 100%;
- padding: 10px;
- color: white;
- font-size: 1.2em;
- transform: translate(-50%);
- left: 50%;
- transition: display 2s;
- display: none;
- background-color: rgb(0, 126, 48);
-}
 
+#error-message {
+    position: fixed;
+    bottom: 10%;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
+    max-width: 100%;
+    padding: 10px;
+    color: white;
+    font-size: 1.2em;
+    transform: translate(-50%);
+    left: 50%;
+    transition: display 2s;
+    display: none;
+    background-color: rgb(0, 126, 48);
+}

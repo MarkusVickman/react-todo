@@ -1,37 +1,29 @@
-import { useState } from "react"
 import TodoInterface from "../todo-interface"
 import './Table.css'
-import Form from "./Form"
+
+
+interface TableProps {
+    todo: TodoInterface;
+    editPost: (event: React.MouseEvent<HTMLButtonElement>, id: number) => void;
+};
 
 //Child som tar emot props enligt interface Todo
-function Table({ todo }: { todo: TodoInterface }) {
-
+const Table: React.FC<TableProps> = ({ todo, editPost }) => {
    
-
-    const [form, setForm] = useState<TodoInterface>({ title: "", description: "", isCompleted: "ej påbörjad" })
-
-
-
-    const editThisPost = (event: any) => {
-        editPost();
-    }
-
     //Tar emot props och skriver ut värden på rätt plats med Vilkor för att bestäma stil och text som skrivs ut.
     // Kan ändra om klar eller ej med funktionen changeIfCompleted och dess id.
     return (
-        <div>
-
-
-            
-
-            <article className="article" id={(todo.id?.toString())}>
-                <h2>{todo.title}</h2>
-                <p><b>Beskrivning: </b> <span contentEditable onInput={(event) => setForm({ ...form, description: event.currentTarget.textContent || "" })}>{todo.description}</span></p>
-                <p><b>Datum: </b>{todo.date?.toString().substring(0, 10)}</p>
-                <p><b>Utförd: </b>{todo.isCompleted}</p>
-                <button onClick={editThisPost}>Ändra</button>
-            </article>
-        </div>
+        <article className="article" key={todo.id} style={{ backgroundColor: 
+            todo.isCompleted === "avklarad" ? "yellowgreen" : 
+            todo.isCompleted === "påbörjad" ? "lightblue" : 
+            todo.isCompleted === "ej påbörjad" ? "salmon" : 
+            "white" }}>
+            <h2>{todo.title}</h2>
+            <p><b>Beskrivning: </b> {todo.description}</p>
+            <p><b>Datum: </b>{todo.date?.toString().substring(0, 10)}</p>
+            <p><b>Utförd: </b>{todo.isCompleted}</p>
+            <button id={(todo.id?.toString())} onClick={(event) => editPost(event, parseInt(todo.id as unknown as string))}>Ändra</button>
+          </article>
     )
 }
 

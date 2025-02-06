@@ -11,6 +11,10 @@ Styling av klass page-container är till för att sidans innehåll minst ska tä
   line-height: 1.2;
 }
 
+body {
+  background-color: rgb(236, 236, 236);
+}
+
 /*För att footern ska fungera på ett bra sätt*/
 .page-container {
   position: relative;

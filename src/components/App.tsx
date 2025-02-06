@@ -1,8 +1,7 @@
 import './App.css'
 import TodoInterface from "../todo-interface"
-import { FormEvent, ReactElement, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import Table from './Table';
-import Todo from '../todo-interface';
 
 
 function App() {
@@ -123,14 +122,14 @@ function App() {
   }
 
 
-  const editPost = (event: React.MouseEvent) => {
+  const editPost = (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     setFormTitle("Redigera inlägg");
 
 
-    const target = parseInt((event.currentTarget as HTMLDivElement).id);
+    const target = parseInt((event.currentTarget as HTMLButtonElement).id);
     const todo = todos.find(todo => todo.id === target);
 
 
@@ -214,19 +213,7 @@ function App() {
       </form>
 
       <h2 className='text-center'>Att göra-lista</h2>
-      {todos.map((todo: TodoInterface) => /*<Table todo={todo} key={todo.id} />*/
-
-        <article className="article" key={todo.id} style={{ backgroundColor: 
-          todo.isCompleted === "avklarad" ? "yellowgreen" : 
-          todo.isCompleted === "påbörjad" ? "lightblue" : 
-          todo.isCompleted === "ej påbörjad" ? "salmon" : 
-          "white" }}>
-          <h2>{todo.title}</h2>
-          <p><b>Beskrivning: </b> {todo.description}</p>
-          <p><b>Datum: </b>{todo.date?.toString().substring(0, 10)}</p>
-          <p><b>Utförd: </b>{todo.isCompleted}</p>
-          <button id={(todo.id?.toString())} onClick={editPost}>Ändra</button>
-        </article>
+      {todos.map((todo: TodoInterface) => <Table todo={todo} key={todo.id} editPost={editPost}/>
       )}
 
       <div id="error-message"><p>{errorMessage}</p></div>
