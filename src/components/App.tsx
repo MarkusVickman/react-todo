@@ -122,7 +122,7 @@ function App() {
   }
 
 
-  const editPost = (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
+  const editPost = (event: React.MouseEvent<HTMLButtonElement>) => {
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
