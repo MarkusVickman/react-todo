@@ -3,34 +3,39 @@ import TodoInterface from "../todo-interface"
 import { FormEvent, useEffect, useState } from 'react';
 import Table from './Table';
 
-/*Parentkomponenten åt table(utskrift av inlägg) med formulär*/ 
+/*Parentkomponenten åt table(utskrift av inlägg) med formulär*/
 function App() {
 
-  /* Alla olika states */ 
+  /* Alla olika states */
   const [todos, setToDos] = useState<TodoInterface[] | []>([]);
   const [formData, setFormData] = useState<TodoInterface>({ title: "", description: "", isCompleted: "ej påbörjad" })
   const [formTitle, setFormTitle] = useState<string>("Lägg till");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [errorTitle, setErrorTitle] = useState<string>("");
   const [errorDescription, setErrorDescription] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [update, setUpdate] = useState<string>("");
 
-  /* Deklarerar htmlelement */ 
+  /* Deklarerar htmlelement */
   const errorDiv = document.getElementById("error-message");
   const submitBtn = document.getElementById("submit");
   const updateBtn = document.getElementById("update");
   const deleteBtn = document.getElementById("delete");
   const cancelBtn = document.getElementById("cancel");
 
-  /*resetar genom att ladda in inlägg på nytt när states ändras.*/ 
+  /*resetar genom att ladda in inlägg på nytt när update ändras (update används bara som trigger.).*/
   useEffect(() => {
     getTodos();
-  })
+  },[update])
 
- /* 
-    -Async-metod med GET- som läser in alla inlägg från json till object.
- */ 
+  /* 
+     -Async-metod med GET- som läser in alla inlägg från json till object.
+  */
   const getTodos = async () => {
     try {
+
+      setLoading(true);
+
       const respons = await fetch("https://m2-react-todo-backend-nest-js-1050979898493.europe-north1.run.app/api");
       if (!respons.ok) {
         throw Error;
@@ -40,13 +45,15 @@ function App() {
       }
     }
     catch (Error) {
-      error(`Det gick inte att hämta att göra-listan`);
+      //  error(`Det gick inte att hämta att göra-listan`);
+    } finally {
+      setLoading(false);
     }
   }
 
- /* 
-    -Async-metod med POST- som sparar ett inlägg från object till json.
- */ 
+  /* 
+     -Async-metod med POST- som sparar ett inlägg från object till json.
+  */
   const postForm = async (event: FormEvent) => {
     event.preventDefault();
     if (checkInput()) {
@@ -68,13 +75,16 @@ function App() {
       } catch (Error) {
         error(`Det gick inte att skapa ett att göra-inlägg`);
         console.log(Error);
+      } finally {
+        const addUpdate: string = update + "one";
+        setUpdate(addUpdate)
       }
     }
   }
 
- /* 
-    -Async-metod med PUT för att uppdatera ett befintligt inlägg från object till json.
- */ 
+  /* 
+     -Async-metod med PUT för att uppdatera ett befintligt inlägg från object till json.
+  */
   const updatePost = async (id: number, event: React.MouseEvent) => {
     event.preventDefault();
     if (checkInput()) {
@@ -97,13 +107,16 @@ function App() {
       }
       catch (Error) {
         error(`Det gick inte att uppdatera att göra-inlägg med ID${id}`);
+      } finally {
+        const addUpdate: string = update + "one";
+        setUpdate(addUpdate)
       }
     }
   }
 
- /* 
-    -Async-metod med DELETE som tar bort ett inlägg.
- */ 
+  /* 
+     -Async-metod med DELETE som tar bort ett inlägg.
+  */
   const deletePost = async (id: number, event: React.MouseEvent) => {
     event.preventDefault();
     try {
@@ -123,12 +136,15 @@ function App() {
     }
     catch (Error) {
       error(`Det gick inte att ta bort att göra-inlägg med ID:${id}`);
+    } finally {
+      const addUpdate: string = update + "one";
+      setUpdate(addUpdate)
     }
   }
 
- /* 
-    -Async-metod med POST- som sparar ett inlägg från object till json.
- */ 
+  /* 
+     -Async-metod med POST- som sparar ett inlägg från object till json.
+  */
   const editPost = (event: React.MouseEvent<HTMLButtonElement>) => {
 
     //Scrollanimation till toppen av sidan
@@ -220,8 +236,12 @@ function App() {
         <input id="cancel" type="button" value="Avbryt åtgärd" className='submit-button' onClick={cancelPost} />
       </form>
 
+      {
+       loading && <h2 className='text-center'>Att göra-lista laddas...</h2>
+      }
+
       <h2 className='text-center'>Att göra-lista</h2>
-      {todos.map((todo: TodoInterface) => <Table todo={todo} key={todo.id} editPost={editPost}/>
+      {todos.map((todo: TodoInterface) => <Table todo={todo} key={todo.id} editPost={editPost} />
       )}
 
       <div id="error-message"><p>{errorMessage}</p></div>
