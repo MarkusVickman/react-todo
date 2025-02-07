@@ -1,50 +1,42 @@
-# React + TypeScript + Vite
+# React Moment 2 - Att göra
+Applikationen ska hantera att göra-inlägg kopplat till en backend.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Besök webbplatsen (https://attgora.netlify.app/).
 
-Currently, two official plugins are available:
+## Uppgift
+Uppgiften gick ut på att skapa en react applikation programmerad i TypeScript. Applikationen ska hantera att göra-inlägg kopplat till en backend.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Krav:**
+* Använda TypeScript för typning och ökad kodkvalitet
+* Applikationen ska vara uppdelad i lämpliga komponenter, tex en komponent för utskrift av lista, en för formulär.
+* Implementera dynamisk datahämtning med useEffect-hook
+* Skapa ett formulär för att lägga till nya todos med följande validering:
+** Titel måste vara minst 3 tecken lång
+** Beskrivning är valfri men får max vara 200 tecken
+* Hantera olika status för todos:
+** Ej påbörjad
+** Pågående
+** Avklarad
+* Implementera funktioner för att:
+** Hämta in samtliga todos och skriv ut på lämpligt sätt på sidan
+** Lägga till en ny todo
+** Updatera status för en todo (ej påbörjad, pågående, avklarad)
+** Ta bort en todo
+* Hantera laddnings- och felmeddelanden vid API-anrop
+* Uppdatera listans tillstånd när en todo läggs till, uppdateras eller tas bort
+* Designa applikationen med CSS så att den fungerar väl på både desktop och mobila enheter.
+* Använd komponentspecifik CSS med inline-CSS och/eller separat stilmall som importeras till komponenten.
 
-## Expanding the ESLint configuration
+## Lösning
+Applikationen använder många komponenten. De två huvudkomponenterna är App.tsx och Table.tsx. 
+App.tsx är parent till Table och skickar med props till komponenten.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Applikationen kopplas till en Nest.js backend genom api anrop med FetchAPI.
 
-- Configure the top-level `parserOptions` property like this:
+## Testa
+För att testa eller bygga vidare på projektet behöver repot klonas och kommandot ` npm install ` ska köras i terminalen.
+För att testköra ` npm run dev `
+För att publicera ` npm run build `
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+**Markus Vickman**
+**MAVI2302**
